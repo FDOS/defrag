@@ -1,0 +1,25 @@
+#
+# makefile for files in fte\low
+#
+
+compiler = tcc -c
+options  = -w -d -Z -O -ml -Iinclude
+libman   = tlib  
+
+all: apmlib.lib
+        @copy apmlib.lib ..\lib 
+        @echo Advanced power management routines compiled.
+   
+apmlib.lib:  obj\apmlib.obj 
+   @..\..\..\bin\delete apmlib.lib
+   @..\..\..\bin\delete apmlib.bak
+   @$(libman) apmlib + obj\apmlib.obj
+   @..\..\..\bin\delete apmlib.bak
+
+obj\apmlib.obj: source\apmlib.c include\cext.h include\apmlib.h 
+        @$(compiler) $(options) -oobj\apmlib.obj source\apmlib.c
+
+clean:
+   @..\..\..\bin\delete obj\apmlib.obj
+   @..\..\..\bin\delete apmlib.lib
+   @..\..\..\bin\delete *.bak
