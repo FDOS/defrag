@@ -1,0 +1,14 @@
+#
+# Protocol for overlay system, compile with protmak.exe
+#
+# This file exists to have one source for protocol numbers, 
+# 
+
+# These will be converted to constants used by the overlay system.
+# The constants are automatically enumerated.
+
+NOP               
+SMALLMESSAGE      
+LARGEMESSAGE      
+ONMAP
+DRAWMAP

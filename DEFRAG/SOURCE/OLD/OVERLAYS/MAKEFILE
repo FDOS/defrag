@@ -1,0 +1,75 @@
+#
+# Makefile for the overlay system.
+#
+
+compiler = tcc -c
+options  = -w -d -Z -O
+
+assembler = nasm
+
+libman = tlib
+
+all: ovlyslve.lib ovlyhost.lib ovlfake.obj
+     @echo Overlay system compiled
+
+ovlyslve.lib: slvstubs.obj ovlmain.obj ovlslave.obj
+     @..\..\bin\delete ovlyslve.lib
+     @$(libman) ovlyslve.lib + slvstubs.obj
+     @$(libman) ovlyslve.lib + ovlmain.obj
+     @$(libman) ovlyslve.lib + ovlslave.obj
+     @..\..\bin\delete ovlyslve.bak
+
+ovlyhost.lib: hostslct.obj ovlhost.obj ovlspwn.obj
+     @..\..\bin\delete ovlyhost.lib
+     @$(libman) ovlyhost.lib + hostslct.obj
+     @$(libman) ovlyhost.lib + ovlhost.obj
+     @$(libman) ovlyhost.lib + ovlspwn.obj
+     @..\..\bin\delete ovlyhost.bak
+
+slvstubs.obj: slvstubs.asm protocol.inc
+     @$(assembler) slvstubs.asm -f obj -o slvstubs.obj
+
+ovlmain.obj: ovlmain.c overlays.h ovlslave.h
+     @$(compiler) $(options) ovlmain.c
+
+ovlslave.obj: ovlslave.asm
+     @$(assembler) ovlslave.asm -f obj -o ovlslave.obj
+
+hostslct.obj: hostslct.c expected.h ovlhost.h protocol.h
+     @$(compiler) $(options) hostslct.c
+
+ovlhost.obj: ovlhost.asm
+     @$(assembler) ovlhost.asm -f obj -o ovlhost.obj
+
+ovlspwn.obj: ovlspwn.c overlays.h ovlhost.h
+     @$(compiler) $(options) ovlspwn.c
+
+ovlfake.obj: ovlfake.c ovlslave.h
+     @$(compiler) $(options) ovlfake.c
+
+protocol.h: protocol.src automat\protmak.exe
+     @automat\protmak protocol.src
+
+protocol.inc: protocol.src automat\protmak.exe
+     @automat\protmak protocol.src
+
+automat\protmak.exe: automat\protmak.c
+     @cd automat
+     @make
+     @cd ..
+
+clean:
+     @..\..\bin\delete slvstubs.obj
+     @..\..\bin\delete ovlmain.obj
+     @..\..\bin\delete ovlslave.obj
+     @..\..\bin\delete hostslct.obj
+     @..\..\bin\delete ovlhost.obj
+     @..\..\bin\delete ovlspwn.obj
+     @..\..\bin\delete ovlfake.obj
+     @..\..\bin\delete protocol.h
+     @..\..\bin\delete protocol.inc
+     @..\..\bin\delete ovlyslve.lib
+     @..\..\bin\delete ovlyhost.lib
+     @cd automat
+     @make clean
+     @cd ..

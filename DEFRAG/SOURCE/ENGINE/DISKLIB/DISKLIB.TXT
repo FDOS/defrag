@@ -1,0 +1,56 @@
+                    DISKLIB - The DISK LIBrary
+                           03-Nov-1998
+                http://www.diskwarez.com/disklib.htm
+
+[The Web-Page above will have more up to date information than this file.]
+
+Due to an increase in demand for and questions about direct disk
+access for Micrososft platforms, and due to the fact that Microsoft
+has no API for direct disk access, I am releasing this library
+much earlier than I intended at that start. I am still working on
+this code.
+
+This is the ALPHA version of DISKLIB, a library of DISK I/O
+functions for DOS and Windows. Please read this file in full.
+
+Highlights:
+
+*   This version is Microsoft, Watcom and DJGPP compatible.
+
+*   This version will work (more or less, see below) with DOS,
+    Windows 95, Windows 98 and Windows NT.
+
+Lowlights:
+
+*   THIS IS _ALPHA_ SOFTWARE. USE AT YOUR OWN RISK.
+
+*   SOME OF THE CODE IS NOT FINISHED; SOME JUST RECENTLY MODIFIED.
+
+*   SECTOR WRITING HAS NOT BEEN FULLY TESTED. See the test BOOTAW.C
+    test program.
+
+*   WINDOWS 98 AND FAT32 SUPPORT ARE NOT 100% FINISHED.
+
+*   On Windows 95 there lacks physical drive support for hard disks.
+
+*   There is no real documentation other than the code itself.
+
+*   This version lacks the pre-compiled LIB files and binaries
+    (there are several test and example programs).
+
+*   This version's error reporting functions and Windows's test
+    programs are only console apps.
+
+*   There are several DJGPP specific files which always seem to
+    lag behind the others in the latest updates and fixes.
+
+*   The Windows NT files also lag behind the others at times.
+
+
+I hope to eventually offer a "Quality Product", this is just an
+ALPHA version and may just have problems.
+
+If you have any ideas for this library, or like or use or have fixes
+or just want to rap, please send e-mail to: admin@diskwarez.com .
+
+--

@@ -1,0 +1,32 @@
+Chkdsk error messages.
+----------------------
+
+These messages appear when you use either chkdks or chkdsk /F.
+
+If you are using chkdsk without the /F option, no repairs are performed
+even though the prompt may ask if you want to fix the disk.
+
+(.)(..) does not exist
+allocation error, size truncated
+cannot chdir to root
+cannot chdir to subdirectory
+cannot RECOVER (.) entry, processing continued
+cannot RECOVER (..) entry, processing continued
+chdir (..) failed trying alternate method
+contains xxx non-contignous blocks
+convert directory to file (Y/N)?
+directory is totaly empty, no (.) or (..)
+disk error reading FAT
+disk error writing FAT
+entry has bad attribute (or size, or link)
+errors found, F parameter not specified
+file is cross-linked to cluster x
+first cluster number is invalid, entry truncated
+has invalid cluster, file truncated
+insufficient room in root directory {for fix files}
+invalid current directory
+non-DOS diskette
+Probable non-DOS diskette, continue (Y/N)
+processing cannot continue
+unrecoverable error in directory
+xxx lost clusters in yyy chains

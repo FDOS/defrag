@@ -1,0 +1,48 @@
+DF
+
+usage: df [-{options}] <file> <drive>
+       df [-{options}] <drive> <file>
+
+write file to floppy, or write floppy to file
+
+options:    r  reset drive before and after
+            v  verify disk writes
+            z  zero buffers before reads
+            k  keep writing even if errors
+            l  read disk up to last allocated cluster (FAT disks only)
+            s  write system tracks of disk to file (FAT disks only)
+            n  do not ask for confirmation (unless to overwrite file)
+
+DF is a RAWRITE program to write a file to a floppy disk, that also
+can write a floppy to a file, and has more options.
+
+The 'z' option might be useful with the 'k' option so that when a disk
+read error occurs, sectors unable to be read will be zero filled. (The
+disk to file function along with '-k' will be useful to recover data
+from damaged disks.)
+
+The 'l' option will be very useful when writing a disk to a file -- if
+you want to distribute a (FAT) boot disk that is not full, it will
+save file space.
+
+With the 's' option only the (FAT) disk's system data is written. Not
+terribly useful except for a true quick format when writing the file
+back to a disk. (Microsoft's "quick format" feature fails on non-DOS
+formated disks; quite strange...) BUG: the data written is up to the
+track and head that the ROOT is on; so this option is really only
+useful on a blank disk.
+
+The other options should be fairly obvious.
+
+DF does all disk I/O via INT 13h (will the exception of getting some
+DOS FORMAT information when -l is used) a track at a time. If an I/O
+error occurs on a track, DF will then access the track a sector at a
+time, displaying some '.'s to indicate that, and 'x's to indicate the
+bas sector. DF does not yet retry the sector accesses (next version
+perhaps).
+
+
+19-Nov-1998
+Gregg Jennings
+This program is part of The DISK LIBrary.
+http://www.diskwarez.com/disklib.htm

@@ -1,0 +1,41 @@
+This directory contains the files that implement the dialogs used in the
+interface for defrag.
+
+- copyrigt.c:
+	meaning: shows the copyright notice.
+	working: yes.
+
+- defrdone.c:
+        meaning: shows the dialog at the end of the defragmentation proces.
+        working: yes.
+
+- maplegnd.c:
+	meaning: shows the map legend dialog.
+	working: yes.
+
+- menu.c:
+	meaning: shows the main menu.
+	working: yes.
+
+- methods.c:
+	meaning: shows the defragmentation selection dialog.
+	working: yes.
+
+- msgbxs.c:
+	meaning: contains message boxes.
+	working: yes.
+
+- recoment.c:
+        meaning: shows the dialog that shows the defragmentation factor.
+        working: yes
+
+- seldrvbx.c:
+	meaning: shows the drive selection box.
+	working: no.
+	problem: the drag bar is not changed correctly while using a mouse.
+
+- sortbox.c:
+	meaning: shows the sort options selection box.
+	working: yes.
+
+Imre

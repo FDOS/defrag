@@ -1,0 +1,43 @@
+#
+# Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -O -d -Z -w -ml
+
+libman = tlib
+
+all: c_repl.lib
+        @echo C library replacements assembled.
+
+c_repl.lib: strings.obj time.obj gdscreen.obj higdscrn.obj inttostr.obj
+        @..\..\..\bin\delete c_repl.lib
+        @$(libman) c_repl.lib + strings.obj
+        @$(libman) c_repl.lib + time.obj
+        @$(libman) c_repl.lib + gdscreen.obj
+        @$(libman) c_repl.lib + higdscrn.obj
+        @$(libman) c_repl.lib + inttostr.obj
+        @..\..\..\bin\delete c_repl.bak
+
+strings.obj: strings.asm       
+        @nasm strings.asm -f obj -o strings.obj
+
+time.obj: time.asm
+        @nasm time.asm -f obj -o time.obj
+
+gdscreen.obj: gdscreen.asm
+        @nasm gdscreen.asm -f obj -o gdscreen.obj
+
+higdscrn.obj: higdscrn.c gdscreen.h
+        @$(compiler) $(options) higdscrn.c
+
+inttostr.obj: inttostr.c c-repl.h
+        @$(compiler) $(options) inttostr.c
+
+clean:
+        @..\..\..\bin\delete strings.obj
+        @..\..\..\bin\delete time.obj
+        @..\..\..\bin\delete gdscreen.obj
+        @..\..\..\bin\delete higdscrn.obj
+        @..\..\..\bin\delete inttostr.obj
+        @..\..\..\bin\delete c_repl.lib

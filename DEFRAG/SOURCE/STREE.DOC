@@ -1,0 +1,48 @@
+This is the source tree for defrag.
+
+\DEFRAG
+ÃÄÄBIN                       : place for defrag.exe and cmdefrag.exe
+³  
+ÀÄÄSOURCE
+   ÀÄÄALPHA02                : this is alpha 0.2
+      ÃÄÄOVERLAYS            : overlay system
+      ³  ÀÄÄAUTOMAT           
+      ÃÄÄCMDEFINT            : command line interface
+      ³  ÃÄÄDOSIO
+      ³  ÃÄÄMAIN
+      ³  ÀÄÄOVLHOST
+      ÃÄÄMSDEFINT            : microsoft look alike interface
+      ³  ÃÄÄSCREEN
+      ³  ÃÄÄMOUSE
+      ³  ÃÄÄKEYBOARD
+      ³  ÃÄÄEVENT
+      ³  ÃÄÄDIALOG
+      ³  ÃÄÄWINMAN
+      ³  ÃÄÄMAIN
+      ³  ÃÄÄC_REPL
+      ³  ÃÄÄOVLHOST
+      ³  ÃÄÄHELPSYS
+      ³  ÀÄÄLOGMAN
+      ÃÄÄENVIRON             : environment checking routines
+      ÃÄÄENGINE              : fat transformation engine
+      ³  ÃÄÄLOW
+      ³  ÃÄÄDOC
+      ³  ÃÄÄHIGH
+      ³  ÃÄÄHEADER
+      ³  ÃÄÄLNGCALC
+      ³  ÀÄÄLIB
+      ÃÄÄMEMMAN              : memory management routines
+      ³  ÃÄÄUNIMEM
+      ³  ÃÄÄLOW
+      ³  ÀÄÄHNDMEMAN
+      ÃÄÄMISC                : miscellanous routines.
+      ÃÄÄMODLGATE            : module gate
+      ÃÄÄINIFILE             : ini file support 
+      ÀÄÄMODULES             : modules:
+         ÃÄÄSRTFAT12            sort entries
+         ÃÄÄINFFAT12            get information
+         ÃÄÄCRHFAT12
+         ÃÄÄDFGFAT12            actual defragmentation
+         ÀÄÄTSTFAT12            check disk integrity
+    
+Imre

@@ -1,0 +1,20 @@
+#
+# Makefile to put all modules in one lib.
+#
+
+libman   = tlib
+
+all: modules.lib
+        @echo General module lib created.
+
+modules.lib: infofat.lib checkfat.lib sortfat.lib
+        @..\..\..\bin\delete modules.lib        
+        @..\..\..\bin\delete modules.bak
+        @$(libman) modules.lib + infofat.lib
+        @$(libman) modules.lib + checkfat.lib
+        @$(libman) modules.lib + sortfat.lib
+        @..\..\..\bin\delete modules.bak
+
+clean:
+      @..\..\..\bin\delete modules.lib
+      @..\..\..\bin\delete modules.bak

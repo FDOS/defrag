@@ -1,0 +1,26 @@
+File LOW\BOOT.C:
+    return (WriteSectors(handle, 1, 0, buffer) != -1);
+void WriteSectorsPerCluster(struct BootSectorStruct* boot,
+void WriteSectorsPerFat(struct BootSectorStruct* boot,
+void WriteSectorsPerTrack(struct BootSectorStruct* boot,
+File LOW\DIRECT.C:
+   result = (WriteSectors(handle, 1, handle->dirbegin + (index / 16), buf)
+   if (WriteSectors(handle, 1, pos1->sector, buffer) == -1)
+   if (WriteSectors(handle, 1, pos1->sector, sector1) == -1)
+   if (WriteSectors(handle, 1, pos2->sector, sector2) == -1)
+File LOW\FAT.C:
+    return WriteSectors(handle, SECTORSPERREADBUF,
+File LOW\RDWRSECT.C:
+int WriteSectors(RDWRHandle handle, int nsects, SECTOR lsect, void* buffer,
+int WriteSectors(RDWRHandle handle, int nsects, SECTOR lsect, void* buffer,
+static int PrivateInitReadWriteSectors(char* driveorfile, int modus,
+int InitReadWriteSectors(char* driveorfile, RDWRHandle* handle)
+    return PrivateInitReadWriteSectors(driveorfile, O_RDWR, handle);
+    return PrivateInitReadWriteSectors(driveorfile, O_RDONLY, handle);
+int InitWriteSectors(char* driveorfile, RDWRHandle* handle)
+    return PrivateInitReadWriteSectors(driveorfile, O_WRONLY, handle);
+void CloseReadWriteSectors(RDWRHandle* handle)
+File LOW\SUBDIR.C:
+    if (WriteSectors(handle, 1, pos->sector, buffer) == -1)
+File LOW\FSINFO.C:
+    if (WriteSectors(handle, 1, FSinfoStart, info) != -1)

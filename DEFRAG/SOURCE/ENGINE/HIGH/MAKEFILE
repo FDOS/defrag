@@ -1,0 +1,83 @@
+#
+# Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -w -d -Z -O -ml -I..\header -I..\..\misc -N
+libman   = tlib
+
+all: high.lib
+        @copy high.lib ..\lib 
+        @echo high FTE routines compiled.
+     
+high.lib: walktree.obj cpysct.obj Dircnt.obj FndCiDir.obj \
+          FndCiFAT.obj FndFFSpc.obj FndLstCt.obj GtNthCst.obj \
+          NthEntry.obj NthFlClt.obj RelocClt.obj SwpClst.obj  
+        @..\..\..\bin\delete high.lib
+        @..\..\..\bin\delete high.bak
+        @$(libman) high + walktree.obj
+        @$(libman) high + cpysct.obj
+        @$(libman) high + Dircnt.obj
+        @$(libman) high + FndCiDir.obj
+        @$(libman) high + FndCiFAT.obj
+        @$(libman) high + FndFFSpc.obj
+        @$(libman) high + FndLstCt.obj
+        @$(libman) high + GtNthCst.obj
+        @$(libman) high + NthEntry.obj
+        @$(libman) high + NthFlClt.obj
+        @$(libman) high + RelocClt.obj
+        @$(libman) high + SwpClst.obj
+        @..\..\..\bin\delete high.bak
+                
+walktree.obj: walktree.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header walktree.c
+
+cpysct.obj: cpysct.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header cpysct.c
+        
+Dircnt.obj: Dircnt.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header Dircnt.c
+
+FndCiDir.obj: FndCiDir.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header FndCiDir.c
+        
+FndCiFAT.obj: walktree.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header FndCiFAT.c
+        
+FndFFSpc.obj: FndFFSpc.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header FndFFSpc.c
+        
+FndLstCt.obj: walktree.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header FndLstCt.c
+        
+GtNthCst.obj: GtNthCst.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header GtNthCst.c
+        
+NthEntry.obj: NthEntry.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header NthEntry.c
+        
+NthFlClt.obj: NthFlClt.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header NthFlClt.c
+        
+RelocClt.obj: RelocClt.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header RelocClt.c
+        
+SwpClst.obj: SwpClst.c ..\header\fte.h ..\..\misc\bool.h
+        @$(compiler) $(options) -I..\header SwpClst.c
+
+clean:
+   @..\..\..\bin\delete walktree.obj
+        @..\..\..\bin\delete cpysct.obj
+        @..\..\..\bin\delete Dircnt.obj
+        @..\..\..\bin\delete FndCiDir.obj
+        @..\..\..\bin\delete FndCiFAT.obj
+        @..\..\..\bin\delete FndFFSpc.obj
+        @..\..\..\bin\delete FndLstCt.obj
+        @..\..\..\bin\delete GtNthCst.obj
+        @..\..\..\bin\delete NthEntry.obj
+        @..\..\..\bin\delete NthFlClt.obj
+        @..\..\..\bin\delete RelocClt.obj
+        @..\..\..\bin\delete SwpClst.obj
+        @..\..\..\bin\delete high.lib
+        @..\..\..\bin\delete high.bak
+        @..\..\..\bin\delete *.bak

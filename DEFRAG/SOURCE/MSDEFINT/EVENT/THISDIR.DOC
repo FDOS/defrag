@@ -1,0 +1,11 @@
+This directory contains the files that are used to combine the event
+handling in the system. Currently this combines alt key pressing, keyboard
+handling and mouse routines.
+
+event.c:
+	meaning: event handler.
+	working: certain.
+
+event.h:
+	meaning: event handling code.
+	working: certain.

@@ -1,0 +1,34 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -O -d -Z -w -ml
+
+libman = tlib
+
+all: logman.lib
+        @echo Log manager routines compiled.
+
+logman.lib: scrlog.obj lologman.obj logprint.obj
+        @..\..\..\bin\delete logman.lib
+        @$(libman) logman.lib + scrlog.obj
+        @$(libman) logman.lib + lologman.obj
+        @$(libman) logman.lib + logprint.obj
+        @..\..\..\bin\delete logman.bak
+
+scrlog.obj: scrlog.c ..\screen\screen.h ..\c_repl\c-repl.h ..\event\event.h
+        @$(compiler) $(options) scrlog.c
+
+lologman.obj: lologman.asm
+        @nasm lologman.asm -f obj -o lologman.obj
+
+logprint.obj: logprint.c logman.h
+        @$(compiler) $(options) logprint.c
+
+clean:
+        @..\..\..\bin\delete scrlog.obj
+        @..\..\..\bin\delete lologman.obj
+        @..\..\..\bin\delete logprint.obj
+        @..\..\..\bin\delete logman.obj
+        @..\..\..\bin\delete logman.lib

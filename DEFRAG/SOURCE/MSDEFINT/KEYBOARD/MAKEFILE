@@ -1,0 +1,28 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -O -Z -d -w -ml
+
+libman = tlib
+
+all: keyboard.lib
+        @echo Keyboard routines compiled.
+
+keyboard.lib: keyboard.obj altkey.obj
+        @..\..\..\bin\delete keyboard.lib
+        @$(libman) keyboard.lib + keyboard.obj
+        @$(libman) keyboard.lib + altkey.obj
+        @..\..\..\bin\delete keyboard.bak 
+
+keyboard.obj: keyboard.asm
+        @nasm keyboard.asm -f obj -o keyboard.obj         
+
+altkey.obj: altkey.c keyboard.h
+        @$(compiler) $(options) -c altkey.c 
+
+clean:
+        @..\..\..\bin\delete keyboard.obj 
+        @..\..\..\bin\delete altkey.obj   
+        @..\..\..\bin\delete keyboard.lib

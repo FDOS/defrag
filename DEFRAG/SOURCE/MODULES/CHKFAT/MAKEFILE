@@ -1,0 +1,47 @@
+#
+# Makefile for CheckFAT module
+#
+
+compiler = tcc -c
+options  = -d -O -Z -w -ml -I..\..\engine\header;..\..\misc
+
+libman = tlib
+
+checkfat.lib: chkvol.obj descchk.obj descifat.obj dfatchk.obj checkfat.obj 
+     @..\..\..\bin\delete checkfat.lib
+     @$(libman) checkfat.lib + chkvol.obj
+     @$(libman) checkfat.lib + descchk.obj
+     @$(libman) checkfat.lib + descifat.obj
+     @$(libman) checkfat.lib + dfatchk.obj
+     @$(libman) checkfat.lib + checkfat.obj
+     @..\..\..\bin\delete checkfat.bak
+     @copy checkfat.lib ..\modbins
+     @echo FAT integrity checks compiled
+
+chkvol.obj: chkvol.c ..\..\engine\header\fte.h \
+            checkfat.h chkrouts.h
+     @$(compiler) $(options) -I$(incpath);..\..\modlgate chkvol.c
+
+descchk.obj: descchk.c ..\..\engine\header\fte.h checkfat.h
+     @$(compiler) $(options) -I$(incpath) descchk.c
+
+descifat.obj: descifat.c ..\..\engine\header\fte.h checkfat.h
+     @$(compiler) $(options) -I$(incpath) descifat.c
+
+dfatchk.obj: dfatchk.c  ..\..\engine\header\fte.h checkfat.h
+     @$(compiler) $(options) -I$(incpath) dfatchk.c
+
+checkfat.obj: checkfat.c ..\..\engine\header\fte.h checkfat.h
+     @$(compiler) $(options) -I$(incpath);..\..\modlgate checkfat.c
+
+clean:
+     @..\..\..\bin\delete chkvol.obj
+     @..\..\..\bin\delete descchk.obj
+     @..\..\..\bin\delete descifat.obj
+     @..\..\..\bin\delete dfatchk.obj
+     @..\..\..\bin\delete checkfat.obj
+     @..\..\..\bin\delete checkfat.lib
+     @..\..\..\bin\delete checkfat.bak
+     @..\..\..\bin\delete ..\modbins\checkfat.lib
+     @..\..\..\bin\delete ..\modbins\checkfat.bak
+

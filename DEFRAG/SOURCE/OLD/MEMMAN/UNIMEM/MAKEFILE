@@ -1,0 +1,26 @@
+#
+# Makefile for memory unification.
+#
+
+compiler = tcc -c 
+options  = -w -Z -d -O
+
+all: uniems.obj unixms.obj unimain.obj uniswap.obj
+        
+uniems.obj: uniems.c unimem.h ..\..\misc\bool.h ..\low\ems.h        
+        @$(compiler) $(options) uniems.c
+
+unixms.obj: unixms.c unimem.h ..\..\misc\bool.h ..\low\xms.h
+        @$(compiler) $(options) unixms.c
+
+unimain.obj: unimain.c unimem.h ..\..\misc\bool.h ..\low\mainmem.h
+        @$(compiler) $(options) unimain.c
+
+uniswap.obj: uniswap.c unimem.h ..\..\misc\bool.h ..\low\swapfile.h
+        @$(compiler) $(options) uniswap.c
+
+clean:
+        @..\..\..\bin\delete uniems.obj
+        @..\..\..\bin\delete unixms.obj
+        @..\..\..\bin\delete unimain.obj
+        @..\..\..\bin\delete uniswap.obj

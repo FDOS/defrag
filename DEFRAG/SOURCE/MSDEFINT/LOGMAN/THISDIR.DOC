@@ -1,0 +1,19 @@
+This directory contains files in order to log the different actions.
+
+At this time only a screen log is supported. A file log can easily be added
+later.
+
+logprint.c:
+       meaning: contains a generic routine to print text on a log.
+       working: yes
+
+lologman.asm:
+       meaning: contains low level routines to print to the screen log
+                (screen page 2).
+       working: yes
+
+scrlog.c:
+       meaning: contains the code for the screen log.
+       working: yes
+
+Imre

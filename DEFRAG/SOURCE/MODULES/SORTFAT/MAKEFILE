@@ -1,0 +1,82 @@
+#
+# Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -d -O -Z -w -ml -I..\..\engine\header;..\..\misc  -N
+
+libman = tlib
+linker = tcc -ml
+
+all: sortdir\sortdir.exe
+        @echo Directory sort module compiled 
+
+sortdir\sortdir.exe: ..\modbins\sortfat.lib obj\sortdir.obj
+   @$(linker) -N -M -esortdir\sortdir.exe obj\sortdir.obj ..\modbins\sortfat.lib ..\..\engine\lib\fte.lib ..\..\misc\misc.lib
+
+..\modbins\sortfat.lib: obj\sorttree.obj obj\sortcfgf.obj obj\ssortdir.obj \
+         obj\srtentrs.obj obj\cmpfncs.obj obj\dsksort.obj \
+         obj\memsort.obj obj\rdentrs.obj obj\wrentrs.obj obj\sortfat.obj
+   @..\..\..\bin\delete ..\modbins\sortfat.lib
+   @..\..\..\bin\delete ..\modbins\sortfat.bak
+   @$(libman) ..\modbins\sortfat.lib + obj\sorttree.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\sortcfgf.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\ssortdir.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\srtentrs.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\cmpfncs.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\dsksort.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\memsort.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\rdentrs.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\wrentrs.obj
+   @$(libman) ..\modbins\sortfat.lib + obj\sortfat.obj
+   @..\..\..\bin\delete sortfat.bak
+
+obj\sorttree.obj: sorttree.c ..\..\engine\header\fte.h
+        @$(compiler) $(options) -oobj\sorttree.obj sorttree.c
+
+obj\sortcfgf.obj: sortcfgf.c ..\..\engine\header\fte.h sortfatf.h
+        @$(compiler) $(options) -oobj\sortcfgf.obj sortcfgf.c
+
+obj\ssortdir.obj: ssortdir.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -I..\..\modlgate -oobj\ssortdir.obj ssortdir.c         
+
+obj\srtentrs.obj: srtentrs.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -I..\..\modlgate -oobj\srtentrs.obj srtentrs.c 
+
+obj\cmpfncs.obj: cmpfncs.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -oobj\cmpfncs.obj cmpfncs.c
+
+obj\sortdir.obj: sortdir\sortdir.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -I..\..\engine\apmlib\include -oobj\sortdir.obj sortdir\sortdir.c
+
+obj\dsksort.obj: dskcfg\dsksort.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -oobj\dsksort.obj dskcfg\dsksort.c 
+
+obj\memsort.obj: memcfg\memsort.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -oobj\memsort.obj memcfg\memsort.c
+
+obj\rdentrs.obj: memcfg\rdentrs.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -I..\..\modlgate -oobj\rdentrs.obj memcfg\rdentrs.c
+
+obj\wrentrs.obj: memcfg\wrentrs.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -I..\..\modlgate -oobj\wrentrs.obj memcfg\wrentrs.c
+
+obj\sortfat.obj: sortfat.c ..\..\engine\header\fte.h sortfatf.h
+       @$(compiler) $(options) -I..\..\modlgate -oobj\sortfat.obj sortfat.c
+
+clean:
+        @..\..\..\bin\delete sortfat.lib
+        @..\..\..\bin\delete ..\modbins\sortfat.lib
+        @..\..\..\bin\delete obj\sorttree.obj
+        @..\..\..\bin\delete obj\sortcfgf.obj
+        @..\..\..\bin\delete obj\ssortdir.obj
+        @..\..\..\bin\delete obj\srtentrs.obj
+        @..\..\..\bin\delete obj\cmpfncs.obj
+        @..\..\..\bin\delete obj\memsort.obj
+        @..\..\..\bin\delete obj\dsksort.obj
+        @..\..\..\bin\delete obj\rdentrs.obj
+        @..\..\..\bin\delete obj\wrentrs.obj 
+        @..\..\..\bin\delete obj\wrentrs.obj
+        @..\..\..\bin\delete obj\sortdir.obj
+        @..\..\..\bin\delete obj\sortfat.obj
+        @..\..\..\bin\delete sortdir\sortdir.exe

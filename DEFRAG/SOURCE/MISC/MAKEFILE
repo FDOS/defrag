@@ -1,0 +1,61 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c 
+options  = -w -d -Z -O -ml
+
+libman = tlib
+
+all: misc.lib
+     @echo Miscelanous routines compiled.
+
+misc.lib: switchch.obj critical.obj hicritcl.obj gtdrvnms.obj \
+     gtcdex.obj drvtypes.obj aalloc.obj reboot.obj 
+     @..\..\bin\delete misc.lib
+     @..\..\bin\delete misc.bak
+     @$(libman) misc.lib + switchch.obj
+     @$(libman) misc.lib + critical.obj
+     @$(libman) misc.lib + hicritcl.obj
+     @$(libman) misc.lib + gtdrvnms.obj
+     @$(libman) misc.lib + gtcdex.obj
+     @$(libman) misc.lib + drvtypes.obj
+     @$(libman) misc.lib + aalloc.obj
+     @$(libman) misc.lib + reboot.obj
+     @..\..\bin\delete misc.bak
+        
+switchch.obj: switchch.asm
+     @nasm switchch.asm -f obj -o switchch.obj
+
+critical.obj: critical.asm
+     @nasm critical.asm -f obj -o critical.obj
+
+hicritcl.obj: hicritcl.asm
+     @nasm hicritcl.asm -f obj -o hicritcl.obj
+
+gtdrvnms.obj: gtdrvnms.c
+     @$(compiler) $(options) gtdrvnms.c
+
+gtcdex.obj: gtcdex.asm
+     @nasm gtcdex.asm -f obj -o gtcdex.obj
+
+reboot.obj: reboot.c 
+     @$(compiler) $(options) -I..\engine\apmlib\include reboot.c 
+
+drvtypes.obj: drvtypes.asm
+     @nasm drvtypes.asm -f obj -o drvtypes.obj
+
+aalloc.obj: aalloc.c aalloc.h
+     @$(compiler) $(options) aalloc.c
+     
+clean:
+     @..\..\bin\delete switchch.obj
+     @..\..\bin\delete critical.obj
+     @..\..\bin\delete hicritcl.obj
+     @..\..\bin\delete gtdrvnms.obj
+     @..\..\bin\delete gtcdex.obj
+     @..\..\bin\delete reboot.obj
+     @..\..\bin\delete drvtypes.obj
+     @..\..\bin\delete aalloc.obj
+     @..\..\bin\delete misc.lib
+     @..\..\bin\delete *.bak

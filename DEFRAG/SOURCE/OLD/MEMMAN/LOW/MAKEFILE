@@ -1,0 +1,23 @@
+#
+#  Makefile for low level memory management functions.
+#
+
+all: xms.obj ems.obj mainmem.obj swapfile.obj
+
+ems.obj: ems.asm
+        @nasm ems.asm -f obj -o ems.obj
+
+xms.obj: xms.asm
+        @nasm xms.asm -f obj -o xms.obj
+
+mainmem.obj: mainmem.c
+        @tcc -c mainmem.c
+
+swapfile.obj: swapfile.c
+        @tcc -c swapfile.c
+
+clean:
+        @..\..\..\bin\delete ems.obj
+        @..\..\..\bin\delete xms.obj
+        @..\..\..\bin\delete mainmem.obj
+        @..\..\..\bin\delete swapfile.obj

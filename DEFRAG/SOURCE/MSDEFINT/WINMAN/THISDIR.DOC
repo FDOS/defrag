@@ -1,0 +1,67 @@
+This directory contains the window manager and associated controls.
+
+checkbox.c:
+      meaning:
+      working: maybe (no checkboxes in defrag at this time).
+
+cmdbtn.c:
+      meaning: command buttons
+      working: yes
+
+cmnctrls.c:
+      meaning: contains some common controls (predefined).
+      working: yes
+
+drvsltbx.c:
+      meaning: drive selection box
+      working: yes
+
+eventbtn.c:
+      meaning: event button
+      working: yes
+
+extevent.c:
+      meaning: called peridiodically to check for external events.
+      working: yes
+
+frame.c:
+      meaning: frame
+      working: yes
+
+hline.c:
+      meaning: horizontal line
+      working: yes
+
+ictrlvls.c:
+      meaning: used in the control implementations to initialize with
+               common parameters.
+      working: yes
+
+label.c:
+      meaning: label
+      working: yes
+
+lolstbx.c:
+      meaning: low list box implementation
+      working: yes
+
+slctbtn.c:
+      meaning: selection buttons
+      working: yes
+
+timlabel.c:
+      meaning: label with changing caption
+      working: yes
+
+vscrctrl.c:
+      meaning: vertical scroll control (base for listboxes).
+      working: yes
+      idea:
+           listboxes are implemented in steps:
+              vscrlctrls.c -> lolstbx.c -> drvsltbx.c
+
+winman.c:
+      meaning: the window manager!
+      working: yes
+
+

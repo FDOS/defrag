@@ -1,0 +1,21 @@
+This directory contains files that handle specific types of memory.
+
+- mainmem.c:
+	meaning: main memory manager.
+	working: don't know.
+
+- swapfile.c:
+	meaning: swap file manager.
+	working: don't know.
+
+- ems.asm:
+	meaning: EMS manager.
+	working: yes.
+	problem: don't know wether resizing works, for the rest it is certain
+		 to work.
+
+- xms.asm:
+	meaning: EMS manager.
+	working: partially.
+	problem: UMB code doesn't work, for the rest i am certain it works.
+

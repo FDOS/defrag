@@ -1,0 +1,98 @@
+#
+# Makefile for the FAT transformation engine
+#
+
+libman = tlib
+
+fte.lib: low.lib high.lib misc.lib apmlib.lib cache.lib disklib.lib \
+         heapmem.lib
+        @..\..\..\bin\delete fte.lib
+        @..\..\..\bin\delete fte.bak
+        @$(libman) fte.lib + low.lib
+        @$(libman) fte.lib + high.lib
+        @$(libman) fte.lib + misc.lib
+        @$(libman) fte.lib + apmlib.lib
+        @$(libman) fte.lib + cache.lib
+        @$(libman) fte.lib + disklib.lib
+        @$(libman) fte.lib + heapmem.lib
+        @..\..\..\bin\delete fte.bak
+        
+low.lib:
+        @cd ..\low
+        @make
+        @cd ..\lib
+        
+high.lib:
+        @cd ..\high
+        @make
+        @cd ..\lib
+        
+misc.lib:
+        @cd ..\misc
+        @make
+        @cd ..\lib
+
+apmlib.lib: 
+        @cd ..\apmlib
+        @make
+        @cd ..\lib
+
+cache.lib:
+        @cd ..\cache
+        @make
+        @cd ..\lib
+        
+disklib.lib:
+        @cd ..\disklib\dos\tcc
+        @make
+        @cd ..\..\..\lib
+     
+heapmem.lib:
+        @cd ..\heapmem
+        @make
+        @cd ..\lib
+
+clean:
+        @cd ..\low
+        @make clean
+        @cd ..\lib
+        @cd ..\high
+        @make clean
+        @cd ..\lib
+        @cd ..\misc
+        @make clean
+        @cd ..\lib
+        @cd ..\apmlib
+        @make clean
+        @cd ..\lib
+        @cd ..\cache
+        @make clean
+        @cd ..\lib
+        @cd ..\disklib\dos\tcc
+        @make clean
+        @cd ..\..\..\lib
+        @cd ..\heapmem
+        @make clean
+        @cd ..\lib
+        @..\..\..\bin\delete misc.lib
+        @..\..\..\bin\delete apmlib.lib
+        @..\..\..\bin\delete cache.bak     
+        @..\..\..\bin\delete misc.lib
+        @..\..\..\bin\delete apmlib.lib
+        @..\..\..\bin\delete cache.lib    
+        @..\..\..\bin\delete disklib.lib           
+        @..\..\..\bin\delete fte.lib
+        @..\..\..\bin\delete heapmem.lib
+        @..\..\..\bin\delete high.lib
+        @..\..\..\bin\delete low.lib
+        @..\..\..\bin\delete misc.bak
+        @..\..\..\bin\delete apmlib.bak
+        @..\..\..\bin\delete cache.bak     
+        @..\..\..\bin\delete misc.bak
+        @..\..\..\bin\delete apmlib.bak
+        @..\..\..\bin\delete cache.bak    
+        @..\..\..\bin\delete disklib.bak
+        @..\..\..\bin\delete fte.bak
+        @..\..\..\bin\delete heapmem.lib
+        @..\..\..\bin\delete high.lib
+        @..\..\..\bin\delete low.lib

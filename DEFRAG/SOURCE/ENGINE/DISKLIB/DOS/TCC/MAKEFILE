@@ -1,0 +1,87 @@
+#
+# makefile for files in fte\disklib\dos, etc...
+#
+
+compiler  = tcc -c
+options   = -w -d -Z -O -ml -I..\..
+libman    = tlib
+
+all: disklib.lib
+        @copy disklib.lib ..\..\..\lib
+        @echo Gregg Jennings disklib compiled.
+        
+disklib.lib: ver.obj rdump.obj ioctl.obj dosio.obj free.obj error.obj \
+             lock.obj read.obj write.obj getdisk.obj bios.obj part.obj \
+             xlate.obj
+        @..\..\..\..\..\bin\delete disklib.lib
+        @..\..\..\..\..\bin\delete disklib.bak
+        @$(libman) disklib + ver.obj
+        @$(libman) disklib + rdump.obj
+        @$(libman) disklib + ioctl.obj
+        @$(libman) disklib + dosio.obj
+        @$(libman) disklib + free.obj
+        @$(libman) disklib + error.obj
+        @$(libman) disklib + lock.obj
+        @$(libman) disklib + read.obj
+        @$(libman) disklib + write.obj
+        @$(libman) disklib + getdisk.obj
+        @$(libman) disklib + bios.obj
+        @$(libman) disklib + part.obj
+        @$(libman) disklib + xlate.obj
+        @..\..\..\..\..\bin\delete disklib.bak
+
+ver.obj: ..\ver.c
+        @$(compiler) $(options) -over.obj ..\ver.c
+        
+rdump.obj: ..\rdump.c
+        @$(compiler) $(options) -ordump.obj ..\rdump.c
+
+ioctl.obj: ..\ioctl.c
+        @$(compiler) $(options) -oioctl.obj ..\ioctl.c
+
+dosio.obj: ..\dosio.c
+        @$(compiler) $(options) -odosio.obj ..\dosio.c
+
+free.obj: ..\free.c
+        @$(compiler) $(options) -ofree.obj ..\free.c
+
+error.obj: ..\error.c
+        @$(compiler) $(options) -oerror.obj ..\error.c
+
+lock.obj: ..\lock.c
+        @$(compiler) $(options) -olock.obj ..\lock.c
+
+read.obj: ..\read.c
+        @$(compiler) $(options) -oread.obj ..\read.c
+
+write.obj: ..\write.c
+        @$(compiler) $(options) -owrite.obj ..\write.c
+
+getdisk.obj: ..\getdisk.c
+        @$(compiler) $(options) -ogetdisk.obj ..\getdisk.c
+
+bios.obj: ..\bios.c
+        @$(compiler) $(options) -obios.obj ..\bios.c
+
+part.obj: ..\..\part.c
+        @$(compiler) $(options) -opart.obj ..\..\part.c
+
+xlate.obj: ..\..\xlate.c
+        @$(compiler) $(options) -oxlate.obj ..\..\xlate.c
+
+clean:
+        @..\..\..\..\..\bin\delete disklib.lib
+        @..\..\..\..\..\bin\delete ver.obj
+        @..\..\..\..\..\bin\delete rdump.obj
+        @..\..\..\..\..\bin\delete ioctl.obj
+        @..\..\..\..\..\bin\delete dosio.obj
+        @..\..\..\..\..\bin\delete free.obj
+        @..\..\..\..\..\bin\delete error.obj
+        @..\..\..\..\..\bin\delete lock.obj
+        @..\..\..\..\..\bin\delete read.obj
+        @..\..\..\..\..\bin\delete write.obj
+        @..\..\..\..\..\bin\delete getdisk.obj
+        @..\..\..\..\..\bin\delete bios.obj
+        @..\..\..\..\..\bin\delete part.obj
+        @..\..\..\..\..\bin\delete xlate.obj
+        @..\..\..\..\..\bin\delete *.bak

@@ -1,0 +1,25 @@
+This directory contains the screen drawing routines.
+
+- drawscr.c:
+	meaning: draw defrag main screen.
+	working: certainly.
+
+- drvmap.c:
+	meaning: routines to draw (on) the drive map.
+	working: certainly.
+
+- lowvideo.c:
+	meaning: draws widgets on the screen.
+	working: certainly.
+
+- scrclip.c:
+	meaning: clipboard for copy/pasting screen parts.
+	working: certainly.
+
+- scrmask.c:
+	meaning: screen masks for filling in screen information.
+	working: certainly.
+
+- screen.asm:
+	meaning: low level screen routines.
+	working: certainly.

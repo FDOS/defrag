@@ -1,0 +1,9 @@
+This directory contains the mouse handling code.
+
+- himouse.c:
+	meaning: higher mouse handling routines.
+	working: certainly.
+
+- mouse.asm:
+	meaning: lower mouse handling routines.
+	working: certainly.

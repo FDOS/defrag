@@ -1,0 +1,14 @@
+#
+# Makefile for protmak.exe
+#
+
+all: protmak.exe
+        @echo protmak compiled.
+
+protmak.exe: protmak.c
+        @tcc protmak.c
+        @del protmak.obj
+
+clean: 
+        @..\..\..\bin\delete protmak.obj 
+        @..\..\..\bin\delete protmak.exe 

@@ -1,0 +1,19 @@
+boot.c          read and display boot sector; choose at compile time
+                one of the five Windows' disk I/O functions
+diskfile.c      file to disk / disk to file
+shorti.c        demonstrates Watcom bug
+drives.c        list all physical and logical drives
+getparts.c      get partition information
+testioct.c      test the MS-DOS/Windows IOCTL Read Track function
+dump.c          reads and dumps sectors using disk_read_ioctl()
+vers.c          displays version numbers
+boota.c         read and dump 16 bytes of boot sector using all
+                of the five Windows' disk I/O functions
+bootaw.c        read, modify AND WRITE boot sector using all
+                of the five Windows' disk I/O functions
+lockt.c         test the Windows 95/98 LOCK functions
+media.c         list all physical and logical drives, version 2
+show.c          list all physical drives
+get.c           get device parameters
+last.c          display FAT info and last allocated cluster
+mid.c           set media type

@@ -1,0 +1,9 @@
+Publics by module
+
+BUFSHIFT	size = 1036
+	_RotateBufLeft                    _RotateBufRight
+	_SwapBuffer                       _SwapBufferParts
+
+ENTSHIFT	size = 3066
+	_RotateEntriesLeft                _RotateEntriesRight
+	_SwapBasicEntries                 _SwapLFNEntries

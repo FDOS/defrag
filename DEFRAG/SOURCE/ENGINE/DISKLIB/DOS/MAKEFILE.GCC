@@ -1,0 +1,132 @@
+# DISKLIB - The DISK LIBrary MAKEFILE for DJGPP
+
+O = obj
+CFLAGS = -g -Wall -I..
+
+objs =	$(O)/free.o \
+	$(O)/bios.o \
+	$(O)/ioctl.o \
+	$(O)/dosmem.o \
+	$(O)/rdump.o \
+	$(O)/error.o \
+	$(O)/read.o \
+	$(O)/getdisk.o \
+	$(O)/write.o \
+	$(O)/ver.o \
+	$(O)/part.o \
+	$(O)/xlate.o \
+	$(O)/err.o \
+	$(O)/lib.o \
+	$(O)/fat.o
+
+disklib.a: $(objs)
+	ar -r disklib.a $(objs)
+
+all: get.exe mid.exe show.exe drives.exe last.exe media.exe boot.exe
+
+media.exe: $(O)/media.o disklib.a
+	gcc $(CFLAGS) $(O)/media.o disklib.a -o media.exe
+
+boot.exe: $(O)/boot.o disklib.a
+	gcc $(CFLAGS) $(O)/boot.o disklib.a -o boot.exe
+
+get.exe: $(O)/get.o disklib.a
+	gcc $(CFLAGS) $(O)/get.o disklib.a -o get.exe
+
+mid.exe: $(O)/mid.o disklib.a
+	gcc $(CFLAGS) $(O)/mid.o disklib.a -o mid.exe
+
+show.exe: $(O)/show.o disklib.a
+	gcc $(CFLAGS) $(O)/show.o disklib.a -o show.exe
+
+drives.exe: $(O)/drives.o disklib.a
+	gcc $(CFLAGS) $(O)/drives.o disklib.a -o drives.exe
+
+last.exe: $(O)/last.o disklib.a
+	gcc $(CFLAGS) $(O)/last.o disklib.a -o last.exe
+
+
+$(O)/ioctl.o : gcc/ioctl.c
+	gcc -c $(CFLAGS) gcc/ioctl.c -o $(O)/ioctl.o
+
+$(O)/read.o : gcc/read.c
+	gcc -c $(CFLAGS) gcc/read.c -o $(O)/read.o
+
+$(O)/write.o : gcc/write.c
+	gcc -c $(CFLAGS) gcc/write.c -o $(O)/write.o
+
+$(O)/rdump.o : gcc/rdump.c
+	gcc -c $(CFLAGS) gcc/rdump.c -o $(O)/rdump.o
+
+$(O)/error.o : gcc/error.c
+	gcc -c $(CFLAGS) gcc/error.c -o $(O)/error.o
+
+$(O)/dosmem.o : gcc/dosmem.c
+	gcc -c $(CFLAGS) gcc/dosmem.c -o $(O)/dosmem.o
+
+$(O)/bios.o : gcc/bios.c
+	gcc -c $(CFLAGS) gcc/bios.c -o $(O)/bios.o
+
+$(O)/free.o : free.c
+	gcc -c $(CFLAGS) free.c -o $(O)/free.o
+
+$(O)/dosio.o : dosio.c
+	gcc -c $(CFLAGS) dosio.c -o $(O)/dosio.o
+
+$(O)/getdisk.o : getdisk.c
+	gcc -c $(CFLAGS) getdisk.c -o $(O)/getdisk.o
+
+$(O)/ver.o : ver.c
+	gcc -c $(CFLAGS) ver.c -o $(O)/ver.o
+
+$(O)/fat.o: ../fat.c
+	gcc -c $(CFLAGS) ../fat.c -o $(O)/fat.o
+
+$(O)/xlate.o: ../xlate.c
+	gcc -c $(CFLAGS) ../xlate.c -o $(O)/xlate.o
+
+$(O)/part.o: ../part.c
+	gcc -c $(CFLAGS) ../part.c -o $(O)/part.o
+
+$(O)/err.o: ../err.c
+	gcc -c $(CFLAGS) ../err.c -o $(O)/err.o
+
+$(O)/lib.o: ../lib.c
+	gcc -c $(CFLAGS) ../lib.c -o $(O)/lib.o
+
+
+$(O)/media.o: ../media.c
+	gcc -c $(CFLAGS) ../media.c -o $(O)/media.o
+
+$(O)/boot.o: ../boot.c
+	gcc -c $(CFLAGS) ../boot.c -o $(O)/boot.o
+
+$(O)/get.o: ../get.c
+	gcc -c $(CFLAGS) ../get.c -o $(O)/get.o
+
+$(O)/mid.o: ../mid.c
+	gcc -c $(CFLAGS) ../mid.c -o $(O)/mid.o
+
+$(O)/show.o: ../show.c
+	gcc -c $(CFLAGS) ../show.c -o $(O)/show.o
+
+$(O)/drives.o: ../drives.c
+	gcc -c $(CFLAGS) ../drives.c -o $(O)/drives.o
+
+$(O)/last.o: ../last.c
+	gcc -c $(CFLAGS) ../last.c -o $(O)/last.o
+
+clean:
+	del *.exe
+
+cleanall:
+	del $(O)\*.o
+	del *.exe
+
+test:
+	show.exe >tests
+	drives.exe >>tests
+	media.exe >>tests
+	last.exe >>tests
+	get.exe >>tests
+	boot.exe >>tests

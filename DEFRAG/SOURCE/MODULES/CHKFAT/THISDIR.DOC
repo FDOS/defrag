@@ -1,0 +1,9 @@
+This module checks the integrity of the disk.
+
+Current checks are:
+
+- descchk.c:  checks the boot sector of floppies.
+- descifat.c: checks the descriptor in the fat.
+- dfatchk.c:  checks wether the directories contain the same information.
+
+Imre

@@ -1,0 +1,44 @@
+DISKLIB - The DISK LIBrary
+
+Copyright (C) 1998,1999 Gregg Jennings
+
+
+* Version 0.2a  29-Dec-1998, prozac,
+
+    Fixed a couple of stupid (syntax-like) bugs (in SHOW.C and in
+    WINNT\BIOS.C) introduced by the last version change.
+
+    FAT32 support, and support for drives > 2.1GB is not complete.
+
+
+* Version 0.2   20-Dec-1998, greggj,
+
+    Updated WINNT source files. All Windows NT specific source files
+    are now in the sub-directory WIN32\WINNT, and the makefiles are
+    in the sub-directory WIN32 with the extension of ?NT.
+
+    Fixed bug is WINNT\GETDISK.C (some physical translations wrong).
+
+    Fixed bug is WINNT\BIOS.C (some physical translations wrong).
+
+
+* Version 0.1a  14-Dec-1998, greggj,
+
+    Updated DJGPP source files.
+
+    Fixed several uses of macro `offsetof' that did not have explicit
+    casts.
+
+
+* Version 0.1   12-Dec-1998, greggj,
+
+    First Beta release.
+
+    New application, GETPARTS.C: retrieves partition information
+    without needing the first MBR.
+
+    Fixed possible overflow error in function logical_sector() (XLATE.C)
+    by adding casts for the += operator.
+
+    Fixed error return value in fucntion disk_get_physical() (DOS\BIOS.C
+    and DOS\GCC\BIOS.C).

@@ -1,0 +1,42 @@
+This directory contains low level fat transformation routines. All the
+code in this directory except drive.c is viscous and most will have to
+be fixed.
+
+- boot.c:
+	meaning: boot sector manipulation code.
+	working: yes
+
+- direct.c:
+	meaning: directory manipulation code.
+	working: yes.
+
+- drive.c:
+	meaning: copied from diskcopy because it contains code that tells
+		 wether a certain string represents a string.
+	working: certainly.
+
+- fat.c:
+	meaning: fat manipulation code.
+	working: not tested.
+
+- fteerr.c:
+	meaning: engine error handling.
+	working: works, because it is to simple not too.
+
+- rdwrsect.c:
+	meaning: read/write sectors.
+	working: yes.
+
+- subdir.c:
+	meaning: sub directory manipulation code.
+	working: not tested.
+
+- absdsk.asm:
+	meaning: absread/abswrite low level code.
+	working: no, absread12 and abswrite12 tested and works.
+		     absread16 and abswrite16 not tested but will not work.
+	note:    written because tc201 absread/abswrite only supports fat12.
+
+- hiabsdsk.c:
+	meaning: higher absread/abswrite code.
+	working: not tested.

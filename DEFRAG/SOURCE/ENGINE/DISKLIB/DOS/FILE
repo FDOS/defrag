@@ -1,0 +1,14 @@
+Turbo C++  Version 1.01 Copyright (c) 1990 Borland International
+bios.c:
+Warning bios.c 156: 'sregs' is assigned a value that is never used in function disk_get_physical_ext
+Error bios.c 178: Type mismatch in parameter 'blk' in call to '_bios_disk' in function disk_read_p
+Error bios.c 179: Type mismatch in parameter 'blk' in call to '_bios_disk' in function disk_read_p
+Error bios.c 194: Misplaced endif directive
+Error bios.c 214: Type mismatch in parameter 'blk' in call to '_bios_disk' in function disk_write_p
+Error bios.c 215: Type mismatch in parameter 'blk' in call to '_bios_disk' in function disk_write_p
+Error bios.c 242: Type mismatch in parameter 'blk' in call to '_bios_disk' in function disk_verify_p
+Error bios.c 265: Type mismatch in parameter 'blk' in call to '_bios_disk' in function disk_reset
+Error bios.c 276: Type mismatch in parameter 'blk' in call to '_bios_disk' in function disk_status
+*** 8 errors in Compile ***
+
+        Available memory 316144

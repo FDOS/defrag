@@ -1,0 +1,39 @@
+MID
+
+usage: mid [d]
+
+    where [d] is a 0-based logical drive number; 0 = A:, 1 = B:, etc.
+
+Display and (optionally) modifiy the drive's Serial Number or Volume
+Label.
+
+Sample Ouput:
+
+    Drive D:
+
+    Media ID
+
+    File System:        FAT16
+    Serial Number:      12345678
+    Volume Label:       DISK2_VOL2
+
+    Change? (s,v) _
+
+Entering 's' will ask for a new serial number, 'v' a new volume label.
+Any other key will abort. There will be a confirmation before the data
+is written to the disk (only a 'y' will confirm).
+
+Notes:
+
+This program will work on all Microsoft platforms, with the exception
+that the volume label is not changed under Windows NT (it can be if
+the source file WINNT\GETDISK.C in the DISKLIB library is modified).
+
+The volume label is changed in the BOOT SECTOR, not in the ROOT
+DIRECTORY.
+
+
+07-Dec-1998
+Gregg Jennings
+This program is part of The DISK LIBrary.
+http://www.diskwarez.com/disklib.htm

@@ -1,0 +1,39 @@
+#
+# Makefile for the files in this directory.
+#
+
+compiler = tcc -c
+options  = -O -d -Z -w -ml
+
+libman = tlib
+
+all: environ.lib
+        @echo Environment routines compiled.
+
+environ.lib: os_id.obj dosemu.obj dpmitst.obj checkos.obj
+        @..\..\bin\delete environ.lib
+        @$(libman) environ.lib + os_id.obj
+        @$(libman) environ.lib + dosemu.obj
+        @$(libman) environ.lib + dpmitst.obj
+        @$(libman) environ.lib + checkos.obj
+        @..\..\bin\delete environ.bak
+
+os_id.obj: os_id.c os_id.h dosemu.h
+        @$(compiler) $(options) os_id.c
+
+dosemu.obj: dosemu.c dosemu.h
+        @$(compiler) $(options) dosemu.c
+
+dpmitst.obj: dpmitst.asm 
+        @nasm dpmitst.asm -f obj -o dpmitst.obj
+
+checkos.obj: checkos.c 
+        @$(compiler) $(options) checkos.c
+
+clean: 
+        @..\..\bin\delete os_id.obj
+        @..\..\bin\delete dosemu.obj
+        @..\..\bin\delete dpmitst.obj
+        @..\..\bin\delete checkos.obj
+        @..\..\bin\delete environ.lib
+        @..\..\bin\delete *.bak

@@ -1,0 +1,38 @@
+#
+# makefile for files in fte\low
+#
+
+compiler = tcc -c
+options  = -w -d -Z -O -ml -N
+libman   = tlib
+
+all: heapmem.lib
+        @copy heapmem.lib ..\lib
+        @echo FTE heap memory management compiled.
+
+heapmem.lib: backmem.obj suremem.obj ftemem.obj
+        @..\..\..\bin\delete heapmem.lib
+   @..\..\..\bin\delete heapmem.bak
+   @$(libman) heapmem + backmem.obj
+        @$(libman) heapmem + suremem.obj
+        @$(libman) heapmem + ftemem.obj
+   @..\..\..\bin\delete heapmem.bak
+
+backmem.obj: backmem.c ..\..\misc\bool.h ..\header\backmem.h \
+              ..\header\fteerr.h
+        @$(compiler) $(options) -I..\header;..\..\misc backmem.c
+
+suremem.obj: backmem.c ..\..\misc\bool.h ..\header\suremem.h \
+             ..\header\fteerr.h
+        @$(compiler) $(options) -I..\header;..\..\misc suremem.c
+
+ftemem.obj: ftemem.c ..\..\misc\bool.h ..\header\ftemem.h \
+            ..\header\backmem.h ..\header\suremem.h ..\header\fteerr.h
+        @$(compiler) $(options) -I..\header;..\..\misc ftemem.c
+
+clean:
+   @..\..\..\bin\delete backmem.obj
+        @..\..\..\bin\delete suremem.obj
+        @..\..\..\bin\delete ftemem.obj
+   @..\..\..\bin\delete heapmem.lib
+         @..\..\..\bin\delete *.bak

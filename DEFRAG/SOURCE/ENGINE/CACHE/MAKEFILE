@@ -1,0 +1,48 @@
+#
+# makefile for files in fte\cache
+#
+
+compiler  = tcc -c
+options   = -w -d -Z -O -ml -N
+libman    = tlib
+
+all: cache.lib
+        @copy cache.lib ..\lib
+        @echo FTE cache routines compiled.
+        
+cache.lib: sctcache.obj xmscache.obj emscache.obj xms.obj ems.obj
+        @..\..\..\bin\delete cache.lib
+        @..\..\..\bin\delete cache.bak
+        @$(libman) cache + sctcache.obj
+        @$(libman) cache + xmscache.obj
+        @$(libman) cache + emscache.obj
+        @$(libman) cache + xms.obj
+        @$(libman) cache + ems.obj
+        @..\..\..\bin\delete cache.bak
+
+sctcache.obj: sctcache.c ..\header\sctcache.h ..\header\fat.h  \
+              ..\..\misc\bool.h xmscache.h emscache.h
+        @$(compiler) $(options) sctcache.c
+
+xmscache.obj: xmscache.c ..\header\fat.h ..\header\fatconst.h \
+              ..\header\sctcache.h xms.h xmscache.h ..\..\misc\bool.h
+        @$(compiler) $(options) xmscache.c
+
+emscache.obj: emscache.c ..\header\fat.h ..\header\fatconst.h  \
+              ..\header\sctcache.h ems.h emscache.h ..\..\misc\bool.h
+        @$(compiler) $(options) emscache.c
+
+xms.obj: xms.asm
+        @nasm xms.asm -f obj -o xms.obj
+
+ems.obj: ems.asm
+        @nasm ems.asm -f obj -o ems.obj
+
+clean:
+        @..\..\..\bin\delete sctcache.obj
+        @..\..\..\bin\delete xmscache.obj
+        @..\..\..\bin\delete emscache.obj
+        @..\..\..\bin\delete xms.obj
+        @..\..\..\bin\delete ems.obj
+        @..\..\..\bin\delete cache.lib
+        @..\..\..\bin\delete *.bak        

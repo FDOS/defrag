@@ -1,0 +1,147 @@
+# DISKLIB - The DISK LIBrary MAKEFILE for Microsoft
+
+O = obj                         # obj file directory
+CC = cl
+CFLAGS = /I..\ /W4 /Zi
+#CFLAGS = /I..\ /W4 /Zi /DTRACE
+LFLAGS = /INCREMENTAL:NO
+
+.c{$(O)}.obj :
+    $(CC) $(CFLAGS) /c /Fo$(O)\ $<
+
+OBJS =  $(O)\getdisk.obj    \
+        $(O)\read.obj       \
+        $(O)\write.obj      \
+        $(O)\free.obj       \
+        $(O)\ioctl.obj      \
+        $(O)\device.obj     \
+        $(O)\bios.obj       \
+        $(O)\xlate.obj      \
+        $(O)\rdump.obj      \
+        $(O)\error.obj      \
+        $(O)\part.obj       \
+        $(O)\lib.obj        \
+        $(O)\err.obj        \
+        $(O)\ver.obj        \
+        $(O)\fat.obj
+
+disklib.lib: $(OBJS)
+    lib $(LFLAGS) -out:disklib.lib $(OBJS)
+
+all: get.exe mid.exe show.exe drives.exe last.exe media.exe boot.exe testioct.exe
+
+# programs
+
+testioct.exe: $(O)\testioct.obj disklib.lib
+    $(CC) $(CFLAGS) /Fetestioct.exe $(O)\testioct.obj disklib.lib /link $(LFLAGS)
+
+get.exe: $(O)\get.obj disklib.lib
+    $(CC) $(CFLAGS) /Feget.exe $(O)\get.obj disklib.lib /link $(LFLAGS)
+
+mid.exe: $(O)\mid.obj disklib.lib
+    $(CC) $(CFLAGS) /Femid.exe $(O)\mid.obj disklib.lib /link $(LFLAGS)
+
+show.exe: $(O)\show.obj disklib.lib
+    $(CC) $(CFLAGS) /Feshow.exe $(O)\show.obj disklib.lib /link $(LFLAGS)
+
+drives.exe: $(O)\drives.obj disklib.lib
+    $(CC) $(CFLAGS) /Fedrives.exe $(O)\drives.obj disklib.lib /link $(LFLAGS)
+
+last.exe: $(O)\last.obj disklib.lib
+    $(CC) $(CFLAGS) /Felast.exe $(O)\last.obj disklib.lib /link $(LFLAGS)
+
+media.exe: $(O)\media.obj disklib.lib
+    $(CC) $(CFLAGS) /Femedia.exe $(O)\media.obj disklib.lib /link $(LFLAGS)
+
+boot.exe: $(O)\boot.obj disklib.lib
+    $(CC) $(CFLAGS) /Feboot.exe $(O)\boot.obj disklib.lib /link $(LFLAGS)
+
+booti.exe: $(O)\booti.obj disklib.lib
+    $(CC) $(CFLAGS) /Febooti.exe $(O)\booti.obj disklib.lib /link $(LFLAGS)
+
+# program .C
+
+$(O)\get.obj: ..\get.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\get.c
+
+$(O)\mid.obj: ..\mid.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\mid.c
+
+$(O)\show.obj: ..\show.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\show.c
+
+$(O)\drives.obj: ..\drives.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\drives.c
+
+$(O)\boot.obj: ..\boot.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\boot.c
+
+$(O)\booti.obj: ..\booti.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\booti.c
+
+$(O)\media.obj: ..\media.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\media.c
+
+$(O)\last.obj: ..\last.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\last.c
+
+$(O)\testioct.obj: ..\testioct.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\testioct.c
+
+# library .C Win32
+
+$(O)\bios.obj: bios.c
+    $(CC) $(CFLAGS) /c /DAMIBIOS /Fo$(O)\ bios.c
+
+$(O)\read.obj: read.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ read.c
+
+$(O)\write.obj: write.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ write.c
+
+$(O)\edump.obj: edump.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ edump.c
+
+$(O)\rdump.obj: rdump.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ rdump.c
+
+$(O)\free.obj: free.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ free.c
+
+$(O)\getdisk.obj: getdisk.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ getdisk.c
+
+$(O)\ioctl.obj: ioctl.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ioctl.c
+
+$(O)\device.obj: device.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ device.c
+
+$(O)\ver.obj: ver.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ver.c
+
+# library .C general
+
+$(O)\xlate.obj: ..\xlate.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\xlate.c
+
+$(O)\part.obj: ..\part.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\part.c
+
+$(O)\fat.obj: ..\fat.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\fat.c
+
+$(O)\err.obj: ..\err.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\err.c
+
+$(O)\lib.obj: ..\lib.c
+    $(CC) $(CFLAGS) /c /Fo$(O)\ ..\lib.c
+
+clean :
+    del *.exe
+    del *.pdb
+    del *.ilk
+
+cleanall : clean
+    del $(O)\*.obj
+    del disklib.lib

@@ -1,0 +1,23 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -O -d -Z -w -ml
+
+libman = tlib
+
+all: event.lib
+        @echo Event routines compiled.
+
+event.lib: event.obj
+        @..\..\..\bin\delete event.lib
+        @$(libman) event.lib + event.obj
+        @..\..\..\bin\delete event.bak 
+
+event.obj: event.c event.h ..\mouse\mouse.h ..\keyboard\keyboard.h
+        @$(compiler) $(options) event.c
+
+clean:
+        @..\..\..\bin\delete event.obj 
+        @..\..\..\bin\delete event.lib

@@ -1,0 +1,43 @@
+This directory contains several files that could not be grouped in any
+other directory.
+
+- gtdrvnms.c:
+	meaning: function that returns a string containing all the drive
+		 letters that can be used in defrag.
+	working: not really
+	problem: function works but returns superceded data.
+
+- boot.asm:
+	meaning: functions that reboot the computer.
+	working: yes
+
+- critical.asm:
+	meaning: low level critical handler.
+	working: certainly.
+
+- hicritcl.asm:
+	meaning: specific critical handler implementation.
+	working: certainly.
+
+- timer.asm:
+	meaning: timer interrupt handler.
+	working: may be considered as such.
+
+- hitimer.asm:
+	meaning: specific timer handler implementation.
+	working: certainly not, crashes.
+
+- switchch.asm:
+	meaning: funtion that returns DOS switch char(/).
+	working: certainly.
+
+- gtcdex.asm:
+	meaning: functions that check cdrom presence.
+	working: certainly, but superceded by drvtypes.asm.
+
+- drvtypes.asm:
+	meaning: function that checks drive type.
+	working: yes.
+	note:    this file should now be used to detect all drive types,
+		 so code will need to be changed accordingly.
+

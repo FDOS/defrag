@@ -1,0 +1,13 @@
+This directory contains the routines that bridge between modules and
+interfaces:
+
+- defpars.c: contains the parameters for the different modules.
+
+- chkdski.c: checks the integrity of the disk (calls tstfat12).
+- scandrv.c: scan the drive and calculates defragmentations factor (inffat12).
+
+- optidisk.c: optimized the disk (not implemented).
+- sortdirs.c: sorts directory entries (not implemented).
+
+Imre
+

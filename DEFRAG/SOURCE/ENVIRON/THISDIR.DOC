@@ -1,0 +1,20 @@
+This directory contains files that contain routines that check the
+environment in which defrag runs.
+
+- dosemu.c:
+	meaning: contains a redistribution of detect.h
+	working: should work since it is DOSemu code.
+
+- dpmitst.asm:
+	meaning: contains a routine that checks wether a dpmi host is
+		 loaded.
+	working: yes
+
+- os_id.c:
+	meaning: contains code that detects in which OS the program is
+		 running.
+	working: certainly 
+	note:    this code originates from the snippets library.
+
+note: detect.h is a file that originates from the
+      "DOSEMU-Developpement-Team"'s code for DOSemu.

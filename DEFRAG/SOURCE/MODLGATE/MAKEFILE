@@ -1,0 +1,57 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -O -d -Z -w -ml -N
+
+libman = tlib
+
+all: modlgate.lib
+        @echo Module gate routines compiled.
+
+modlgate.lib: defrpars.obj scandrv.obj optidisk.obj sortdirs.obj chkdski.obj \
+              callback.obj argvars.obj
+        @..\..\bin\delete modlgate.lib
+        @$(libman) modlgate.lib + defrpars.obj
+        @$(libman) modlgate.lib + scandrv.obj
+        @$(libman) modlgate.lib + optidisk.obj
+        @$(libman) modlgate.lib + sortdirs.obj
+        @$(libman) modlgate.lib + chkdski.obj
+        @$(libman) modlgate.lib + callback.obj
+        @$(libman) modlgate.lib + argvars.obj
+        @..\..\bin\delete modlgate.bak
+
+callback.obj: callback.c expected.h
+        @$(compiler) $(options) -I..\misc;..\engine\header callback.c       
+
+defrpars.obj: defrpars.c 
+        @$(compiler) $(options) defrpars.c
+
+scandrv.obj: scandrv.c modlgate.h defrpars.h \
+             ..\misc\bool.h ..\modules\modules.h
+        @$(compiler) $(options) -I..\overlays scandrv.c
+
+optidisk.obj: optidisk.c modlgate.h defrpars.h
+        @$(compiler) $(options) optidisk.c
+
+sortdirs.obj: sortdirs.c modlgate.h defrpars.h
+        @$(compiler) $(options) sortdirs.c
+
+chkdski.obj: chkdski.c ..\misc\bool.h modlgate.h \
+             defrpars.h ..\modules\modules.h
+        @$(compiler) $(options) -I..\overlays chkdski.c
+
+argvars.obj: argvars.c argvars.h
+        @$(compiler) $(options) argvars.c
+
+clean:
+        @..\..\bin\delete defrpars.obj
+        @..\..\bin\delete scandrv.obj
+        @..\..\bin\delete optidisk.obj
+        @..\..\bin\delete sortdirs.obj
+        @..\..\bin\delete chkdski.obj
+        @..\..\bin\delete callback.obj
+        @..\..\bin\delete argvars.obj
+        @..\..\bin\delete modlgate.lib
+        

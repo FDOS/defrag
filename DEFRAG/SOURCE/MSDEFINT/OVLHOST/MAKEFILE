@@ -1,0 +1,31 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c
+options  = -O -d -Z -w -ml
+
+libman = tlib
+
+all: ovlhost.lib
+        @echo Host implementation routines compiled.
+
+ovlhost.lib: ovlimpl.obj lowtime.obj
+        @..\..\..\bin\delete ovlhost.lib
+        @$(libman) ovlhost.lib + ovlimpl.obj
+        @$(libman) ovlhost.lib + lowtime.obj
+        @..\..\..\bin\delete ovlhost.bak
+        
+ovlimpl.obj: ovlimpl.c ..\screen\screen.h ..\dialog\dialog.h \
+             ..\dialog\msgbxs.h ..\..\modlgate\expected.h    \
+             lowtime.h
+        @$(compiler) $(options) -I..\..\misc;..\..\engine\header ovlimpl.c
+
+lowtime.obj: lowtime.asm
+        @nasm lowtime.asm -f obj -o lowtime.obj
+
+clean:
+        @..\..\..\bin\delete ovlimpl.obj 
+        @..\..\..\bin\delete lowtime.obj 
+        @..\..\..\bin\delete ovlhost.lib
+        @..\..\..\bin\delete ovlhost.bak

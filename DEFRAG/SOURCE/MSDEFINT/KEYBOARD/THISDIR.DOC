@@ -1,0 +1,9 @@
+This directory contains the files that contain the keyboard code.
+
+- altkey.c:
+	meaning: waits for an alt key press and release.
+	working: certainly.
+
+- keyboard.asm:
+	meaning: keyboard handling code.
+	working: certainly.

@@ -1,0 +1,6 @@
+These routines are NOT finished and are not used by defrag at this time. 
+
+Some of this code will work (since it has been copied from diskcopy), other 
+parts will not even compile.
+
+Imre

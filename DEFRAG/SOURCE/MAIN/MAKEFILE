@@ -1,0 +1,18 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c 
+options  = -w -d -Z -O -ml
+
+libman = tlib
+
+all: defrag.obj
+     @echo Defrag startup code compiled.
+
+defrag.obj: defrag.c
+     @$(compiler) $(options) defrag.c
+
+clean:
+     @..\..\bin\delete defrag.obj
+     @..\..\bin\delete *.bak   

@@ -1,0 +1,31 @@
+#
+#  Makefile for files in this directory.
+#
+
+compiler = tcc -c 
+options  = -w -d -Z -O -ml -I..\header -I..\..\misc -N
+
+libman = tlib
+
+all: misc.lib
+     @copy misc.lib ..\lib   
+     @echo FTE miscelanous routines compiled.
+
+misc.lib: bufshift.obj entshift.obj
+     @..\..\..\bin\delete misc.lib
+     @..\..\..\bin\delete misc.bak
+     @$(libman) misc.lib + bufshift.obj
+     @$(libman) misc.lib + entshift.obj
+     @..\..\..\bin\delete misc.bak
+
+bufshift.obj: bufshift.c 
+     @$(compiler) $(options) bufshift.c
+     
+entshift.obj: entshift.c
+     @$(compiler) $(options) entshift.c
+
+clean:
+     @..\..\..\bin\delete bufshift.obj
+     @..\..\..\bin\delete entshift.obj
+     @..\..\..\bin\delete misc.lib
+     @..\..\..\bin\delete *.bak

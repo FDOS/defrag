@@ -1,0 +1,19 @@
+This directory contains the defrag main routines.
+
+- defrag.c:
+	meaning: defrag main file.
+	working: incomplete.
+	problem: things will have to be added in order to have a full
+		 defrag implementation.
+
+- checkos.c:
+	meaning: checks the operating environment and puts the necessary
+		 messages on the screen.
+	working: yes
+
+- chkargs.c:
+	meaning: checks the arguments from the command line.
+	working: yes
+
+
+

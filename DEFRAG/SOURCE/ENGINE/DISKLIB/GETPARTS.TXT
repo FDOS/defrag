@@ -1,0 +1,183 @@
+                       GETPARTS ALPHA version
+                       Recover Partition Data
+                            TEST OUTPUT
+                            26-Dec-1998
+
+INTRODUCTION
+
+GETPARTS will calculate a partition table for the MASTER BOOT RECORD
+and does so by reading all of the BOOT SECTORS of a drive. The MBR
+table is NOT READ; this means that the data displayed here can be used
+to recreate a damaged or missing MBR partition table!
+
+             ******************************************
+             * GETPARTS is a "Proof of Concept" only. *
+             * It really does not do anything useful. *
+             ******************************************
+
+This program displays the data only. A future version might have the
+option to write to the MBR or to write an MBR to a binary file.
+
+GETPARTS does not yet display partition types (byte 5 in a partition
+table entry) but that should not be too difficult to at least guess at.
+
+Partitions within partitions ARE NOT yet SUPPORTED.
+
+There are MS-DOS and Windows NT binary versions of GETPARTS available.
+For the full source code, which uses the DISKLIB library, see EOF.
+
+
+NOTES
+
+GETPARTS works well on FAT16 drives, but needs work for other file
+systems. The following information in this document shows what
+GETPARTS figures out on various drives on three computers I have. I
+used DISKBUG to compare the data against (and used FIPS to verify
+DISKBUG).
+
+I will be updating GETPARTS and will welcome comments. If you want to
+change things: please do!
+
+If you make changes please send them to me so I can update GETPARTS for
+everyone else (this could end up being a really useful program). If you
+are worried or are wondering about licensing send email to
+admin@diswarez.com .
+
+
+TEST OUTPUTS
+
+MACHINE 1, MS-DOS, Drive 0 (FAT16)
+
+Command: diskbug drive 0;part;quit
+
+  cylinders:    779
+  heads:        127
+  sectors:      63
+                       start            end          start        number of
+  entry   type       C   H   S       C   H   S       sector         sectors
+
+  Cyl: 0, Head: 0, Sec: 1
+
+  0       06 *       0   1   1     519 127  63           63         4193217
+  1       05       520   0   1     779 127  63      4193280         2096640
+  2       00         0   0   0       0   0   0            0               0
+  3       00         0   0   0       0   0   0            0               0
+
+Command: getparts 0
+
+  HDD 1: 780,63,128, sectors: 6289920
+
+  0, start: 0,1,1, end: 519,127,1, sec: 63, # 4193217
+
+  1, start: 520,0,1, end: 779,127,63, sec: 4193280, # 2096640
+
+
+MACHINE 1, MS-DOS, Drive 1 (EXT2)
+
+Command: diskbug drive 1;part;quit
+
+  cylinders:    618
+  heads:        63
+  sectors:      63
+                       start            end          start        number of
+  entry   type       C   H   S       C   H   S       sector         sectors
+
+  Cyl: 0, Head: 0, Sec: 1
+
+  0       83 *       0   1   1     568  63  63           63         2294145
+  1       82       569   0   1     619  63  63      2294208          205632
+  2       00         0   0   0       0   0   0            0               0
+  3       00         0   0   0       0   0   0            0               0
+
+Command: getparts 1
+
+  HDD 2: 619,63,64, sectors: 2495808
+
+  0, start: 0,1,1,  could not find boot sector!
+
+Notes: I do not know how to parse Linux partitions.
+
+
+MACHINE 1, MS-DOS, Drive 2 (NTFS)
+
+Command: diskbug drive 2;part;quit
+
+  cylinders:    1008
+  heads:        11
+  sectors:      55
+                       start            end          start        number of
+  entry   type       C   H   S       C   H   S       sector         sectors
+
+  Cyl: 0, Head: 0, Sec: 1
+
+  0       07         0   1   1     1008  11  55          55          665885
+  1       00         0   0   0       0   0   0            0               0
+  2       00         0   0   0       0   0   0            0               0
+  3       00         0   0   0       0   0   0            0               0
+
+Command: getparts 2
+
+  HDD 3: 1009,55,12, sectors: 665940
+
+  0, start: 0,1,1, end: 1008,11,1, sec: 55, # 665885
+
+
+MACHINE 2, Windows 98, Drive 0 (FAT32)
+
+Command: diskbug drive 0;part;quit
+
+  cylinders:    789
+  heads:        254
+  sectors:      63
+                       start            end          start        number of
+  entry   type       C   H   S       C   H   S       sector         sectors
+
+  Cyl: 0, Head: 0, Sec: 1
+
+  0       0c *       0   1   1     788 254  63           63        12675222
+  1       00         0   0   0       0   0   0            0               0
+  2       00         0   0   0       0   0   0            0               0
+  3       00         0   0   0       0   0   0            0               0
+
+Command: getparts 0
+
+  HDD 1: 790,63,255, sectors: 12691350
+
+  0, start: 0,1,1, end: 788,254,2, sec: 63, # 12675223
+
+  1, start: 789,0,1,  could not find boot sector!
+
+Notes: Getparts calculates the wrong end: CHS.
+
+
+MACHINE 3, Windows 95, Drive 0 (FAT16)
+
+Command: diskbug drive 0;part;quit
+
+  cylinders:    786
+  heads:        127
+  sectors:      63
+                       start            end          start        number of
+  entry   type       C   H   S       C   H   S       sector         sectors
+
+  Cyl: 0, Head: 0, Sec: 1
+
+  0       06 *       0   1   1     507 127  63           63         4096449
+  1       05       508   0   1     786 127  63      4096512         2249856
+  2       00         0   0   0       0   0   0            0               0
+  3       00         0   0   0       0   0   0            0               0
+
+Command: getparts 0
+
+  HDD 1: 787,63,128, sectors: 6346368
+
+  0, start: 0,1,1, end: 507,127,1, sec: 63, # 4096449
+
+  1, start: 508,0,1, end: 786,127,63, sec: 4096512, # 2249856
+
+
+--
+Gregg Jennings
+26-Dec-1998
+This is part of the DISK LIBrary for MS-DOS and Windows.
+Full source code is available at http://www.diskwarez.com/disklib.htm .

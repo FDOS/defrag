@@ -1,0 +1,32 @@
+This directory contains the defrag main routines.
+
+- defrag.c:
+	meaning: defrag main file.
+	working: incomplete.
+	problem: things will have to be added in order to have a full
+		 defrag implementation.
+
+- keepdos.c:
+	meaning: save/restore the DOS state on entry/exit of defrag.
+	working: may be incomplete.
+	problem: the file may not be enough to be able to save/restore the
+		 complete DOS state.
+
+- actions.c:
+        meaning: contains routines to do the defragmentation.
+        working: yes
+
+- checkos.c:
+        meaning: checks the operating environment and puts the necessary
+                 messages on the screen.
+        working: yes
+
+- chkargs.c:
+        meaning: checks the arguments from the command line.
+        working: yes
+
+- actaspct.h:
+        meaning: contains aspects used in actions.c.
+        working: yes
+
+
